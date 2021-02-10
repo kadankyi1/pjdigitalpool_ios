@@ -13,6 +13,7 @@ struct LoginView: View {
     @State private var password: String = ""
     //@State private var showLoginButton: Bool = true
     @ObservedObject var manager = HttpAuth()
+    @Binding var currentStage: String
         
         
     var body: some View {
@@ -63,9 +64,14 @@ struct LoginView: View {
             } else {
                 ProgressView()
             }
+           
+            
             Text("Not A Member? Join Here")
                 .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 .padding(.bottom, 150)
+                .onTapGesture {
+                    self.currentStage = "SignupView"
+                }
             
         }
     }
@@ -75,7 +81,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(currentStage: .constant("SignupView"))
     }
 }
 
@@ -104,27 +110,36 @@ class HttpAuth: ObservableObject {
             guard let data = data else { return }
             print(data)
             
-            let json = try! JSON(data: data)
-            if let status = json["status"].int {
-              //Now you got your value
-                print(status)
-                
+            do {
+                let json = try JSON(data: data)
+                if let status = json["status"].int {
+                  //Now you got your value
+                    print(status)
+                    
+                    DispatchQueue.main.async {
+                        self.requestMade = true
+                        if status == 1 {
+                            self.authenticated = true;
+                        } else {
+                            self.authenticated = false;
+                            self.showLoginButton = true
+                            if let message = json["message"].string {
+                                //Now you got your value
+                                  print(status)
+                                  
+                                  DispatchQueue.main.async {
+                                      self.message = message
+                                  }
+                              }
+                        }
+                    }
+                }
+            } catch  let error as NSError {
                 DispatchQueue.main.async {
                     self.requestMade = true
-                    if status == 1 {
-                        self.authenticated = true;
-                    } else {
-                        self.authenticated = false;
-                        self.showLoginButton = true
-                        if let message = json["message"].string {
-                            //Now you got your value
-                              print(status)
-                              
-                              DispatchQueue.main.async {
-                                  self.message = message
-                              }
-                          }
-                    }
+                    self.message = "Login failed"
+                    self.authenticated = false
+                    self.showLoginButton = true
                 }
             }
             

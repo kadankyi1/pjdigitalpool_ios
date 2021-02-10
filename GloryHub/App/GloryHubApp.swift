@@ -9,7 +9,9 @@ var body: some Scene {
             if(self.currentStage == "OnboardingView"){
                 OnboardingView(currentStage: $currentStage)
             } else if(self.currentStage == "LoginView"){
-                LoginView()
+                LoginView(currentStage: $currentStage)
+            } else if(self.currentStage == "SignupView"){
+                SignupView(currentStage: $currentStage)
             }
     }
   }
