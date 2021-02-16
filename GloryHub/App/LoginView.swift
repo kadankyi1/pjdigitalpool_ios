@@ -27,6 +27,14 @@ struct LoginView: View {
                     Text(manager.message)
                     .font(.headline)
                     .foregroundColor(.red)
+                } else {
+                    Text("Login Successful")
+                    .font(.headline)
+                    .foregroundColor(.green)
+                    .onAppear(perform: {
+                                self.currentStage = "LoggedInView"
+                                print("currentStage: \(self.currentStage)")
+                    })
                 }
             }
  
@@ -47,6 +55,7 @@ struct LoginView: View {
                 Button(action: {
                     print("\(self.username) and \(self.password)")
                     manager.checkDetails(user_phone_number: self.username, password: self.password)
+                    
                 }) {
                     HStack (spacing: 8) {
                         Text("LOGIN")
@@ -120,6 +129,7 @@ class HttpAuth: ObservableObject {
                         self.requestMade = true
                         if status == 1 {
                             self.authenticated = true;
+                            print(status)
                         } else {
                             self.authenticated = false;
                             self.showLoginButton = true

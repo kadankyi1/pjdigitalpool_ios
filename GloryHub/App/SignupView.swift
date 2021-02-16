@@ -38,6 +38,17 @@ struct SignupView: View {
                     Text(manager.message)
                     .font(.headline)
                     .foregroundColor(.red)
+                } else {
+                    Text("Signup Successful")
+                    .font(.headline)
+                    .foregroundColor(.green)
+                    .onAppear(perform: {
+                        saveTextInStorage("user_firstname", manager.userFirstName)
+                        saveTextInStorage("user_lastname", manager.userLastName)
+                        saveTextInStorage("user_accesstoken", manager.accessToken)
+                        self.currentStage = "LoggedInView"
+                        print("currentStage: \(self.currentStage)")
+                    })
                 }
             }
  
@@ -150,6 +161,9 @@ struct SignupView: View {
     }
 }
 
+func saveTextInStorage(_ index: String, _ value: String) {
+    UserDefaults.standard.set(value, forKey:index)
+}
 
 
 struct SignupView_Previews: PreviewProvider {
@@ -165,6 +179,9 @@ class SignupHttpAuth: ObservableObject {
     @Published var requestMade = false
     @Published var showLoginButton = true
     @Published var message = ""
+    @Published var accessToken = ""
+    @Published var userFirstName = ""
+    @Published var userLastName = ""
 
     func checkDetails(
         first_name: String,
@@ -209,6 +226,21 @@ class SignupHttpAuth: ObservableObject {
                         self.requestMade = true
                         if status == 1 {
                             self.authenticated = true
+                            if let thisaccesstoken = json["access_token"].string {
+                                //Now you got your value
+                                self.accessToken = thisaccesstoken
+                                print("access_token: \(self.accessToken)")
+                              }
+                            if let firstname = json["user"]["user_firstname"].string {
+                                //Now you got your value
+                                self.userFirstName = firstname
+                                print("userFirstName: \(self.userFirstName)")
+                              }
+                            if let surname = json["user"]["user_surname"].string {
+                                //Now you got your value
+                                self.userLastName = surname
+                                print("surname: \(self.userLastName)")
+                              }
                         } else {
                             self.authenticated = false
                             self.showLoginButton = true
