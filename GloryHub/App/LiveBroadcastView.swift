@@ -15,11 +15,13 @@ struct LiveBroadcastView: View {
     
     var body: some View {
         VStack{
+            /*
             Button(action: {
                 self.shouldRefresh = true
             }){
                 Text("Reload")
             }
+             */
             WebView(url: nil, reload: $shouldRefresh)
         }
     }
@@ -36,7 +38,7 @@ struct WebView: UIViewRepresentable {
     var url: URL?     // optional, if absent, one of below search servers used
     @Binding var reload: Bool
 
-    private let urls = [URL(string: "https://google.com/")!, URL(string: "https://bing.com")!]
+    private let urls = [URL(string: "https://embed.restream.io/player/index.html?token=f1bc331156c70d770acb6a186ff8b664")!, URL(string: "https://embed.restream.io/player/index.html?token=f1bc331156c70d770acb6a186ff8b664")!]
     private let webview = WKWebView()
 
     fileprivate func loadRequest(in webView: WKWebView) {
