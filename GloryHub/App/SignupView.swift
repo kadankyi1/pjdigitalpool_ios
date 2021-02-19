@@ -43,9 +43,9 @@ struct SignupView: View {
                     .font(.headline)
                     .foregroundColor(.green)
                     .onAppear(perform: {
+                        saveTextInStorage("user_accesstoken", manager.accessToken)
                         saveTextInStorage("user_firstname", manager.userFirstName)
                         saveTextInStorage("user_lastname", manager.userLastName)
-                        saveTextInStorage("user_accesstoken", manager.accessToken)
                         self.currentStage = "LoggedInView"
                         print("currentStage: \(self.currentStage)")
                     })

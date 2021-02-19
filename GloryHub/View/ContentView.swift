@@ -54,7 +54,7 @@ struct ContentView: View {
                         Text("Read Page")
                     }
                     */
-                ReadListView()
+                    ReadListView()
                     
                 case 3:
                     ScrollView {
