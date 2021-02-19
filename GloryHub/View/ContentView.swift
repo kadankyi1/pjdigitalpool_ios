@@ -57,9 +57,7 @@ struct ContentView: View {
                     ReadListView()
                     
                 case 3:
-                    ScrollView {
-                        Text("Live Page")
-                    }
+                    LiveBroadcastView()
                     
                 case 4:
                     ScrollView {

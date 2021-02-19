@@ -45,7 +45,7 @@ struct ReadListView: View {
                 .font(.headline)
                 .foregroundColor(.green)
                 .onAppear(perform: {
-                    print("Access Token \(access_token)")
+                    print("Access Token request starting")
                     articles_http_manager.getArticles(user_accesstoken: access_token)
                 })
             }
