@@ -77,48 +77,58 @@ class HttpGetReadArticles: ObservableObject {
     @Published var requestMade = false
     @Published var message = ""
     @Published var status = "failed"
+    @Published var articles: [ArticleModel] = []
 
     func getArticles(user_accesstoken: String) {
         guard let url = URL(string: "http://144.202.76.74/api/v1/admin/articles/list")
         else {
-            print("Request failed")
+            print("Request failed 1")
             return
             
         }
 
-        let body: [String: String] = ["user_accesstoken": user_accesstoken]
-
-        let finalBody = try! JSONSerialization.data(withJSONObject: body)
-
+        let auth_pass = "Bearer " + user_accesstoken
+        
+          print("auth_pass:  \(auth_pass)")
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = finalBody
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(user_accesstoken, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(auth_pass, forHTTPHeaderField: "Authorization")
         
           print("About to start request")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
-            print(data)
+            print("data: \(data)")
             
             do {
                 let json = try JSON(data: data)
                 if let status = json["status"].string {
                   //Now you got your value
-                    print(status)
+                    print("status: \(status)")
                     
                     DispatchQueue.main.async {
                         self.requestMade = true
                         self.status = status
                         if status == "success" {
                             print(status)
+                            if let items = json["data"]["data"].array {
+                                for item in items {
+                                    if let article_type = item["article_type"].string {
+                                        print(article_type)
+                                    }
+                                }
+                            }
+                            
                             /*
-                            if let thisaccesstoken = json["access_token"].string {
-                                //Now you got your value
-                                self.accessToken = thisaccesstoken
-                                print("access_token: \(self.accessToken)")
-                              }
-                            */
+                            ForEach() { item in
+                                articles.append(ArticleModel(
+                                    articletype: "HERALD OF GLORY",
+                                    title: "MRS HERALD",
+                                    body: "Knowing that Mrs Mallard was in tune with herself, he tried to learn. Knowing that Mrs Mallard was in tune with herself, he tried to learn. Knowing that Mrs Mallard was in tune with herself, he tried to learn. ",
+                                    image: "newtoday"
+                                ))
+                            }*/
+                           
                         } else {
                             if let message = json["message"].string {
                                 //Now you got your value
@@ -135,6 +145,7 @@ class HttpGetReadArticles: ObservableObject {
                 DispatchQueue.main.async {
                     self.requestMade = true
                     self.message = "Failed to get articles"
+                    print("Request failed 3")
                 }
             }
             
