@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import URLImage // Import the package module
 
 struct ReadArticleRowView: View {
     // MARK: - PROPERTIES
@@ -25,18 +26,19 @@ struct ReadArticleRowView: View {
                     .font(.footnote)
                     .bold()
                     .foregroundColor(Color.black)
-                    .background(Color("ColorArticleHeraldOfGlory"))
+                    .background(Color(article.badge_color))
                     .cornerRadius(2)
             }
-            
-                Image(article.image)
-                    .renderingMode(.original)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.3), radius: 3, x: 2, y: 2)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("ColorBlueInLoggedSpace")]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
-                    .cornerRadius(8)
+            let this_url = URL(string: article.image);
+            URLImage(url: this_url!,
+                     content: { image in
+                         image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 120, height: 120, alignment: .center)
+                            .clipped()
+                            .cornerRadius(8)
+                     })
         }
     }
 }

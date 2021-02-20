@@ -11,9 +11,12 @@ import SwiftUI
 
 struct ArticleModel: Identifiable {
     var id = UUID()
+    var article_sku: Int
     var articletype: String
     var title: String
     var body: String
     var image: String
+    var badge_color: String
+    var article_date: String
 }
 
