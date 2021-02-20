@@ -26,17 +26,30 @@ struct SettingsView: View {
                     Divider().padding(.vertical, 2)
                     // MARK: -- SECTION 2
                     GroupBox(){
-                        SettingsRowView(icon: "prayer", name: "Prayer Requests")
+                        NavigationLink(destination:
+                                        ContactUsView(contact_type: "Prayer Request", textfield_msg: "Type your prayer request", poster_image: "prayerrequest")){
+                            SettingsRowView(icon: "prayer", name: "Prayer Requests")
+                        }
                         Divider().padding(.vertical, 2)
-                        SettingsRowView(icon: "positive-vote", name: "Feedback")
+                        NavigationLink(destination:
+                                        ContactUsView(contact_type: "Feedback", textfield_msg: "Type your feedback here", poster_image: "feedback")){
+                            SettingsRowView(icon: "positive-vote", name: "Feedback")
+                        }
                         Divider().padding(.vertical, 2)
-                        SettingsRowView(icon: "rate", name: "Testimonies")
+                        NavigationLink(destination:
+                                        ContactUsView(contact_type: "Testimonies", textfield_msg: "Type your testimony here", poster_image: "testimonies")){
+                            SettingsRowView(icon: "rate", name: "Testimonies")
+                        }
                         Divider().padding(.vertical, 2)
-                        SettingsRowView(icon: "donation", name: "Partnership")
+                        NavigationLink(destination:
+                                        ContactUsView(contact_type: "Partnership", textfield_msg: "Type your testimony here", poster_image: "partnership")){
+                            SettingsRowView(icon: "donation", name: "Partnership")
+                        }
                         
                     }
                     Divider().padding(.vertical, 2)
                     GroupBox(){
+                        
                         SettingsRowView(icon: "speech", name: "", content: nil, linkLabel: "Christ Witness", linkDestination: "https://www.facebook.com/thegloriouschurch11")
                         SettingsRowView(icon: "holy-ghost", name: "", content: nil, linkLabel: "Holy Generation", linkDestination: "https://www.facebook.com/theHoly.Generation20")
                         

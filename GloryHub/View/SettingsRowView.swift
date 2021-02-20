@@ -29,6 +29,7 @@ struct SettingsRowView: View {
                 .cornerRadius(8)
             Spacer()
             Text(name).foregroundColor(Color.gray)
+            
             if(content != nil){
                 
             } else if(linkLabel != nil && linkDestination != nil){
