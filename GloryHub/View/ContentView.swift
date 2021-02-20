@@ -60,9 +60,7 @@ struct ContentView: View {
                     LiveBroadcastView()
                     
                 case 4:
-                    ScrollView {
-                        Text("Witness Page")
-                    }
+                    SettingsView(user_name: getSavedString("user_firstname") + " " + getSavedString("user_lastname"))
                     
                 default:
                     NavigationView {
