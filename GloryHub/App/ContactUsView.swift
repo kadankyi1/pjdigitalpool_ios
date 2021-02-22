@@ -10,13 +10,15 @@ import SwiftUI
 struct ContactUsView: View {
     // MARK: -- PROPERTIES
     
+    @State var showsAlert = false
     var contact_type: String
     var textfield_msg: String
     var poster_image: String
     @State private var isAnimatingImage: Bool = false
     @ObservedObject var request_manager_send_request = SendMessageRequestHttpAuth()
-    @State var text: String = "Multiline \ntext \nis called \nTextEditor"
+    @State var text: String = "Type here"
     var access_token: String = getSavedString("user_accesstoken");
+    @ObservedObject var model: MyModel = MyModel()
     
     
     
@@ -61,7 +63,7 @@ struct ContactUsView: View {
                             Button(action: {
                                 print("message_type \(contact_type)")
                                 print("access_token \(access_token)")
-                                request_manager_send_request.sendMessage(user_accesstoken: access_token, message_type: contact_type, message_text: "This is a sample message")
+                                request_manager_send_request.sendMessage(user_accesstoken: access_token, message_type: contact_type, message_text: text)
                                 
                             }) {
                                 HStack (spacing: 8) {
@@ -78,6 +80,19 @@ struct ContactUsView: View {
                             .padding(.bottom, 50)
                             .padding(.horizontal, 100)
                             
+                            if request_manager_send_request.requestMade {
+                                VStack {}
+                                    .alert(isPresented: $model.isValid, content: {
+                                    Alert(title: Text("Reply"),
+                                          message: Text(request_manager_send_request.message),
+                                          dismissButton: .default(
+                                            Text("Okay"))
+                                            {
+                                                //print("do something")
+                                                
+                                            })
+                                })
+                            }
                         } else {
                             ProgressView()
                                 .padding(.horizontal, 150)
@@ -122,6 +137,7 @@ class SendMessageRequestHttpAuth: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue(auth_pass, forHTTPHeaderField: "Authorization")
 
@@ -137,12 +153,14 @@ class SendMessageRequestHttpAuth: ObservableObject {
                       DispatchQueue.main.async {
                           self.message = message
                           self.showButton = true
+                          self.requestMade = true
                       }
                 }
             } catch  let error as NSError {
                 DispatchQueue.main.async {
                     self.message = "Failed to send"
                     self.showButton = true
+                    self.requestMade = true
                 }
             }
             
