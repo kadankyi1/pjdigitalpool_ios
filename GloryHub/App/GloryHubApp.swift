@@ -7,7 +7,7 @@ struct GloryHubApp: App {
 var body: some Scene {
     WindowGroup {
         if (getSavedString("user_accesstoken") != "") {
-            ContentView()
+            MainView()
         } else {
             if(self.currentStage == "OnboardingView"){
                 OnboardingView(currentStage: $currentStage)
@@ -16,7 +16,7 @@ var body: some Scene {
             } else if(self.currentStage == "SignupView"){
                 SignupView(currentStage: $currentStage)
             } else if(self.currentStage == "LoggedInView"){
-                ContentView()
+                MainView()
             }
         }
     }

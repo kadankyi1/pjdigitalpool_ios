@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     
     init() {
         UITabBar.appearance().barTintColor = .systemBackground
@@ -34,15 +34,15 @@ struct ContentView: View {
                 
                 switch selectedIndex {
                 case 0:
-                    NavigationView {
+                    /*NavigationView {
                         ScrollView {
                             ForEach(0..<100) { num in
                                 Text("\(num)")
                             }
                         }
                             .navigationTitle("Today Page")
-                    }
-                    
+                    }*/
+                    TodayView()
                 case 1:
                     ScrollView {
                         Text("Library Page")
@@ -126,8 +126,8 @@ struct ContentView: View {
 //        }
 //}
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
