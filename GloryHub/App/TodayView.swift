@@ -16,7 +16,7 @@ struct TodayView: View {
     
     var body: some View {
         
-        var timer2 = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) {
+        var timer2 = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             (_) in
             add_change.switch_add(showingFirstAdd: firstAddIsShowing)
             firstAddIsShowing = add_change.showFirstAdd

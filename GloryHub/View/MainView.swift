@@ -23,10 +23,12 @@ struct MainView: View {
     let tabBarImageNames = ["newtoday", "newlibrary", "newread", "newlive", "newwitness"]
     
     var body: some View {
+        /*
         var timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             (_) in
             updateContent.update_content(user_accesstoken: getSavedString("user_accesstoken"));
         }
+         */
         VStack(spacing: 0) {
             
             ZStack {
