@@ -24,15 +24,7 @@ struct AdvertCarouselView: View {
                     .padding(.horizontal)
             }
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 20) {
-                    ForEach(0..<3) { movie in
-                        NavigationLink(destination: ContactUsView(contact_type: "Prayer Request", textfield_msg: "The test", poster_image: advert[movie])) {
-                            MoviePosterCard(advert: advert[movie])
-                        }
-                    }
-                }
-            }
+            MoviePosterCard(advert: advert[0])
         } // VSTACK
     }
 }
@@ -41,6 +33,6 @@ struct AdvertCarouselView: View {
 // MARK: -- PREVIEW
 struct AdvertCarouselView_Previews: PreviewProvider {
     static var previews: some View {
-        AdvertCarouselView(showTitle: false, title: "Now Playing", advert: ["feedback", "partnership", "feedback", "partnership"])
+        AdvertCarouselView(showTitle: false, title: "Now Playing", advert: ["feedback", "partnership"])
     }
 }

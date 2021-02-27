@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MediaModel: Identifiable {
     var id = UUID()
-    var sku: Int
+    var sku: String
     var type: String
     var title: String
     var body: String
@@ -19,5 +19,6 @@ struct MediaModel: Identifiable {
     var badge_color: String
     var date: String
     var url: String
+    var badge_text: String
 }
 

@@ -8,8 +8,7 @@
 import SwiftUI
 import URLImage // Import the package module
 
-struct HeraldOfGloryTodayView: View {
-    
+struct LatestVideoMessageTodayView: View {
     // MARK: - PROPERTIES
     var media: MediaModel
     
@@ -23,38 +22,29 @@ struct HeraldOfGloryTodayView: View {
                          image
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 120, height: 120, alignment: .center)
-                            .clipped()
-                            .cornerRadius(16)
+                            .frame(width: 120, height: 100, alignment: .center)
+                            .clipShape(Circle())
                      })
-            /*
-            Image(media.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 120, height: 120, alignment: .center)
-                .clipped()
-                .cornerRadius(16)
-            */
             
-
-            VStack(alignment: .leading, spacing: 5){
-                Text(media.title)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .fontWeight(.bold)
-                Text(media.body.prefix(100) + "...")
-                    .font(.caption)
-                    .foregroundColor(Color.secondary)
-                
-                    HStack{
-                        Text("   \(media.badge_text)   ")
-                            .font(.footnote)
-                            .bold()
-                            .foregroundColor(Color.black)
-                            .background(Color("ColorGrayTwo"))
-                            .cornerRadius(2)
-                        Spacer()
-                    }
-            }
+        VStack(alignment: .leading, spacing: 5){
+            Text(media.title)
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
+            
+            Text(media.body.prefix(50) + "...")
+                .font(.caption)
+                .foregroundColor(Color.secondary)
+            
+                HStack{
+                    Text("   \(media.badge_text)   ")
+                        .font(.footnote)
+                        .bold()
+                        .foregroundColor(Color.black)
+                        .background(Color("ColorGrayTwo"))
+                        .cornerRadius(2)
+                    Spacer()
+                }
+        }
             /*
              /*
              let this_url = URL(string: media.image);
@@ -85,7 +75,7 @@ struct HeraldOfGloryTodayView: View {
 }
 
 // MARK: - PREVIEW
-struct HeraldOfGloryTodayView_Previews: PreviewProvider {
+struct LatestVideoMessageTodayView_Previews: PreviewProvider {
     static var previews: some View {
         HeraldOfGloryTodayView(media: MediaModel(
             sku: "1",
@@ -97,7 +87,7 @@ struct HeraldOfGloryTodayView_Previews: PreviewProvider {
             date: "Dec 14 2020",
             url: "ColorArticleHeraldOfGlory",
             badge_text: "LATEST MESSAGE"
-            )
+          )
         )
             .previewLayout(.sizeThatFits)
             .padding()
