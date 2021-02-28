@@ -10,32 +10,53 @@ import SwiftUI
 struct LibraryView: View {
     // MARK: -- PROPERTIES
     var body: some View {
-        VStack {
-            Button(action: {
-                print("First button pressed")
-            }, label: {
-                CustomRowView(buttonTitle: "AUDIOS", buttonColor: "ColorArticleHeraldOfGlory")
-            })
-            .padding(.vertical, 25)
-            
-            Button(action: {
-                print("Second button pressed")
-            }, label: {
-                CustomRowView(buttonTitle: "VIDEOS", buttonColor: "ColorBlueInLoggedSpace")
-            })
-            .padding(.vertical, 25)
-            
-            Button(action: {
-                print("Third button pressed")
-            }, label: {
-                CustomRowView(buttonTitle: "FAVORITES", buttonColor: "ColorGloryNews")
-            })
-            .padding(.vertical, 25)
-
-            
-            Spacer()
-        }
-        .padding()
+        
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 20){
+                        // MARK: -- SECTION 1
+                        
+                        // MARK: -- SECTION 2
+                        GroupBox(){
+                            NavigationLink(destination:
+                                            LibraryMediaListView(fetch_type: "audios", fetch_url: "http://144.202.76.74/api/v1/admin/audios/list", favorite_ids: "")){
+                                LibraryOptionRowView(icon: "music", name: "Audios")
+                            }
+                            
+                        }
+                        .padding()
+                        .clipped()
+                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                        
+                        Divider().padding(.vertical, 15)
+                        
+                        GroupBox(){
+                            NavigationLink(destination:
+                                            LibraryMediaListView(fetch_type: "videos", fetch_url: "http://144.202.76.74/api/v1/admin/videos/list", favorite_ids: "")){
+                                LibraryOptionRowView(icon: "video_lib", name: "Videos")
+                            }
+                            
+                        }
+                        .padding()
+                        .clipped()
+                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                        
+                        Divider().padding(.vertical, 15)
+                        
+                        GroupBox(){
+                            NavigationLink(destination:
+                                            LibraryMediaListView(fetch_type: "favorites", fetch_url: "http://144.202.76.74/api/v1/admin/favorites/list", favorite_ids: "2")){
+                                LibraryOptionRowView(icon: "bookmark", name: "Favorites")
+                            }
+                            
+                        }
+                        .padding()
+                        .clipped()
+                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                    }
+                } // SCROLLVIEW
+            } // NAVIGATION
+            .padding(.horizontal, 20)
         
     } // BODY
 }
@@ -44,26 +65,6 @@ struct LibraryView: View {
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
         LibraryView()
-    }
-}
-
-
-struct CustomRowView: View {
-    
-    @State var buttonTitle: String
-    @State var buttonColor: String
-    
-    var body: some View {
-        Text(buttonTitle)
-            .frame(maxWidth: .infinity, maxHeight: 350)
-            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: .infinity, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 100, idealHeight: 100, maxHeight: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            .foregroundColor(.white)
-            .padding(.vertical, 40)
-            .background(Color(buttonColor))
-            //.background(Image("Background"))
-            .cornerRadius(20)
-            .font(.title)
-            .shadow(radius: 25)
     }
 }
 

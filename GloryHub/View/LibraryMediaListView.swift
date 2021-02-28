@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ReadListView: View {
+struct LibraryMediaListView: View {
     // MARK: - PROPERTIES
     
     var articles: [ArticleModel] = articleData
     var access_token: String = getSavedString("user_accesstoken");
-    @ObservedObject var model: MyModel = MyModel()
+    @ObservedObject var model: MyModel2 = MyModel2()
     @ObservedObject var articles_http_manager = HttpGetReadArticles()
     
 
@@ -54,7 +54,7 @@ struct ReadListView: View {
     }
 }
 
-class MyModel: ObservableObject {
+class MyModel2: ObservableObject {
     @Published var isValid: Bool = false
 
     init() {
@@ -66,20 +66,20 @@ class MyModel: ObservableObject {
 
 // MARK: - PREVIEW
 
-struct ReadListView_Previews: PreviewProvider {
+struct LibraryMediaListView_Previews: PreviewProvider {
     static var previews: some View {
         ReadListView(articles: articleData)
     }
 }
 
-class HttpGetReadArticles: ObservableObject {
+class HttpGetMediaArticles: ObservableObject {
 
     @Published var requestMade = false
     @Published var message = ""
     @Published var status = "failed"
     @Published var received_articles: [ArticleModel] = []
 
-    func getArticles(user_accesstoken: String) {
+    func getMedia(user_accesstoken: String) {
         guard let url = URL(string: "http://144.202.76.74/api/v1/admin/articles/list")
         else {
             print("Request failed 1")

@@ -28,12 +28,12 @@ struct OnboardingView: View {
 
 // MARK: - PREVIEW
 
-/*
+
 struct OnboardingView_Previews: PreviewProvider {
     @Binding var currentStage: String
     static var previews: some View {
-        OnboardingView(start: startData, currentStage: currentStage)
+        OnboardingView(start: startData, currentStage: .constant("SignupView"))
     }
 }
- */
+ 
  

@@ -55,10 +55,7 @@ struct MainView: View {
                         TodayView()
                     }
                 case 1:
-                    ScrollView {
-                        LibraryView()
-                    }
-                    
+                    LibraryView()
                 case 2:
                     /*
                     ScrollView {
