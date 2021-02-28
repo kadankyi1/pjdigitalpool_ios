@@ -2,7 +2,6 @@
 //  ReadListView.swift
 //  GloryHub
 //
-//  Created by Shugaban Media on 16/02/2021.
 //
 
 import SwiftUI

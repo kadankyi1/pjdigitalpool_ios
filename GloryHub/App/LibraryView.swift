@@ -2,7 +2,7 @@
 //  LibraryView.swift
 //  GloryHub
 //
-//  Created by Shugaban Media on 27/02/2021.
+//  Created by Dankyi Anno Kwaku on 27/02/2021.
 //
 
 import SwiftUI
@@ -14,9 +14,7 @@ struct LibraryView: View {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 20){
-                        // MARK: -- SECTION 
-                        
-                        // MARK: -- SECTION 2
+                        // MARK: -- SECTION
                         GroupBox(){
                             NavigationLink(destination:
                                             LibraryMediaListView(fetch_type: "audios", fetch_url: "http://144.202.76.74/api/v1/admin/audios/list", favorite_ids: "")){
