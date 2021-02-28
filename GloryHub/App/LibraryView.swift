@@ -14,7 +14,7 @@ struct LibraryView: View {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 20){
-                        // MARK: -- SECTION 1
+                        // MARK: -- SECTION 
                         
                         // MARK: -- SECTION 2
                         GroupBox(){
