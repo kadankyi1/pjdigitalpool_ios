@@ -26,7 +26,6 @@ struct AudioPlayerView: View {
                     // HEADER
                     ZStack {
                         VideoPlayer(player: AVPlayer(url:  URL(string: resource_url)!)){
-                            
                             /*let this_url = URL(string: image);
                             URLImage(url: this_url!,
                                      content: { image in
