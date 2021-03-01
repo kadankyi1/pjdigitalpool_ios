@@ -29,7 +29,7 @@ struct LibraryMediaListView: View {
                                         .padding(.vertical, 4)
                                 }
                             } else {
-                                NavigationLink(destination: AudioPlayerView(resource_url: item.url)){
+                                NavigationLink(destination: AudioPlayerView(resource_url: item.url, image: item.image, title: item.title, description: item.body, date: item.date)){
                                     MediaListRowItem(media: item)
                                         .padding(.vertical, 4)
                                 }
