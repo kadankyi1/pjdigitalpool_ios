@@ -23,9 +23,16 @@ struct LibraryMediaListView: View {
                 if (media_http_manager.status == "success"){
                     List {
                         ForEach(media_http_manager.received_media) { item in
-                            NavigationLink(destination: AudioPlayerView()){
-                                MediaListRowItem(media: item)
-                                    .padding(.vertical, 4)
+                            if item.type == "video" {
+                                NavigationLink(destination: VideoPlayerView(resource_url: item.url, title: item.title, description: item.body, date: item.date)){
+                                    MediaListRowItem(media: item)
+                                        .padding(.vertical, 4)
+                                }
+                            } else {
+                                NavigationLink(destination: AudioPlayerView(resource_url: item.url)){
+                                    MediaListRowItem(media: item)
+                                        .padding(.vertical, 4)
+                                }
                             }
                         }
                     }
