@@ -16,12 +16,14 @@ struct TodayView: View {
     
     var body: some View {
         
-        var timer2 = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
+        var timer2 = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
             (_) in
             add_change.switch_add(showingFirstAdd: firstAddIsShowing)
             firstAddIsShowing = add_change.showFirstAdd
             print("firstAddIsShowing: \(firstAddIsShowing)")
         }
+         NavigationView {
+            ScrollView(.vertical, showsIndicators: false){
         VStack(alignment: .leading, spacing: 16) {
             
             if firstAddIsShowing {
@@ -51,7 +53,15 @@ struct TodayView: View {
             }
             
             
-            
+                NavigationLink(destination:
+                                AudioPlayerView(
+                                    resource_url: getSavedString("latest_audio_mp3"),
+                                    image: getSavedString("latest_audio_image"),
+                                    title: getSavedString("latest_audio_name"),
+                                    description: getSavedString("latest_audio_description"),
+                                    date: getSavedString("latest_audio_date")
+                                )
+                ){
             GroupBox(){
             HeraldOfGloryTodayView(
                 media: MediaModel(
@@ -59,7 +69,7 @@ struct TodayView: View {
                     type: "audio",
                     title: getSavedString("latest_audio_name"),
                     body: getSavedString("latest_audio_description"),
-                    image: "http://144.202.76.74/uploads/images/5fdb8fded99c82020-12-17-17-05-34.jpg",
+                    image: getSavedString("latest_audio_image"),
                     badge_color: "ColorArticleHeraldOfGlory",
                     date: getSavedString("latest_audio_date"),
                     url: getSavedString("latest_audio_mp3"),
@@ -70,26 +80,43 @@ struct TodayView: View {
             .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
             .padding(.horizontal, 10)
             .padding(.top, 150)
+                }
             
-            GroupBox(){
-            LatestVideoMessageTodayView(
-                media: MediaModel(
-                    sku: getSavedString("latest_video1_id"),
-                    type: "video",
-                    title: getSavedString("latest_video1_name"),
-                    body: getSavedString("latest_video1_description"),
-                    image: getSavedString("latest_video1_image"),
-                    badge_color: "ColorArticleHeraldOfGlory",
-                    date: getSavedString("latest_video1_date"),
-                    url: getSavedString("latest_video1_mp4"),
-                    badge_text: "LATEST MESSAGE"
-                    )
-               )
+                NavigationLink(destination:
+                                VideoPlayerView(
+                                    resource_url: getSavedString("latest_video1_mp4"),
+                                    title: getSavedString("latest_video1_name"),
+                                    description: getSavedString("latest_video1_description"),
+                                    date: getSavedString("latest_video1_date")
+                                )
+                ){
+                        GroupBox(){
+                        LatestVideoMessageTodayView(
+                            media: MediaModel(
+                                sku: getSavedString("latest_video1_id"),
+                                type: "video",
+                                title: getSavedString("latest_video1_name"),
+                                body: getSavedString("latest_video1_description"),
+                                image: getSavedString("latest_video1_image"),
+                                badge_color: "ColorArticleHeraldOfGlory",
+                                date: getSavedString("latest_video1_date"),
+                                url: getSavedString("latest_video1_mp4"),
+                                badge_text: "LATEST MESSAGE"
+                                )
+                           )
+                        }
+                        .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                        .padding(.horizontal, 10)
             }
-            .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-            .padding(.horizontal, 10)
             
-            
+                NavigationLink(destination:
+                                VideoPlayerView(
+                                    resource_url: getSavedString("latest_video2_mp4"),
+                                    title: getSavedString("latest_video2_name"),
+                                    description: getSavedString("latest_video2_description"),
+                                    date: getSavedString("latest_video2_date")
+                                )
+                ){
             GroupBox(){
             LatestVideoMessageTodayView(
                 media: MediaModel(
@@ -107,6 +134,9 @@ struct TodayView: View {
             }
             .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
             .padding(.horizontal, 10)
+                }
+          }
+         }
         }
     }
 }

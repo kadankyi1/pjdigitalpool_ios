@@ -14,7 +14,6 @@ struct OnboardingView: View {
     @Binding var currentStage: String
     
     // MARK: - BODY
-    
     var body: some View {
         TabView {
             ForEach(start[0...1]) { item in

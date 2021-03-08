@@ -47,8 +47,6 @@ struct MediaListRowItem: View {
                        .clipped()
                        .cornerRadius(8)
             }
-            
-            
         }
         .padding()
         //.frame(width: .infinity, height: 150, alignment: .trailing)

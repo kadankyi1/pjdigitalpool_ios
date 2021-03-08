@@ -51,9 +51,7 @@ struct MainView: View {
                         }
                             .navigationTitle("Today Page")
                     }*/
-                    ScrollView {
-                        TodayView()
-                    }
+                    TodayView()
                 case 1:
                     LibraryView()
                 case 2:

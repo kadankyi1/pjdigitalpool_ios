@@ -14,6 +14,7 @@ struct ReadArticleRowView: View {
     
     // MARK: - BODY
     var body: some View {
+        GroupBox(){
         HStack{
             VStack(alignment: .leading, spacing: 5){
                 Text(article.title)
@@ -22,11 +23,11 @@ struct ReadArticleRowView: View {
                 Text(article.body.prefix(100) + "...")
                     .font(.caption)
                     .foregroundColor(Color.secondary)
-                Text(" " + article.articletype + " ")
+                Text("  " + article.articletype + "  ")
                     .font(.footnote)
                     .bold()
-                    .foregroundColor(Color.black)
-                    .background(Color(article.badge_color))
+                    .foregroundColor(Color.white)
+                    .background(Color("ColorGrayTwo"))
                     .cornerRadius(2)
             }
             let this_url = URL(string: article.image);
@@ -49,6 +50,8 @@ struct ReadArticleRowView: View {
                             */
                      })
         }
+        }
+        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
     }
 }
 
