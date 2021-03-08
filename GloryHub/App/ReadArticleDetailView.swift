@@ -28,11 +28,9 @@ struct ArticleDetailView: View {
                                  content: { image in
                                      image
                                         .resizable()
-                                        .scaledToFit()
-                                        //.clipped()
-                                        //.frame(width: 120, height: 120, alignment: .center)
-                                        .padding(.vertical, 20)
-                                        .scaleEffect(isAnimatingImage ? 1.0 : 0.6)
+                                        .aspectRatio(contentMode: .fill)
+                                        .shadow(radius: 4)
+                                        .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 250, idealHeight: 300, maxHeight: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                  })
                         /*
                         Image(article.image)
