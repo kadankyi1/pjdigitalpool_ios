@@ -34,10 +34,10 @@ struct ContactUsView: View {
                         
                         Image(poster_image)
                             .resizable()
-                            .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 8, x: 6, y: 8)
-                            .scaleEffect(isAnimatingImage ? 1.0 : 0.6)
+                            .shadow(radius: 4)
+                            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 250, idealHeight: 300, maxHeight: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
-                    .frame(height: 300)
+                    .frame(height: 200)
                     .onAppear(){
                         withAnimation(.easeOut(duration: 0.5)){
                             isAnimatingImage = true
@@ -58,6 +58,7 @@ struct ContactUsView: View {
                             //.background(.gray)
                             Text(text).opacity(0).padding(.all, 8) // <- This will solve the issue if it is in the same ZStack
                         }
+                        .frame(width: .infinity, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
                         if request_manager_send_request.showButton {
                             Button(action: {
@@ -70,7 +71,7 @@ struct ContactUsView: View {
                                     Text("SEND")
                                         .foregroundColor(Color("ColorAccentOppBlack"))
                                 }
-                                .padding(.horizontal, 30)
+                                .padding(.horizontal, 20)
                                 .padding(.vertical, 10)
                                 .foregroundColor(Color("ColorYellowButton"))
                             } //: BUTTON
@@ -78,7 +79,7 @@ struct ContactUsView: View {
                             .background(Color("ColorYellowButton"))
                             .cornerRadius(20)
                             .padding(.bottom, 50)
-                            .padding(.horizontal, 100)
+                            .padding(.horizontal, 150)
                             
                             if request_manager_send_request.requestMade {
                                 VStack {}
@@ -101,6 +102,7 @@ struct ContactUsView: View {
                         
                     } //: VSTACK
                     .padding(.horizontal, 20)
+                    .padding(.top, 50)
                     .frame(maxWidth: 640, alignment: .center)
                 } //: VSTACK
                 .navigationBarTitle(poster_image, displayMode: .inline)

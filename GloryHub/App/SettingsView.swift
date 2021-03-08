@@ -56,8 +56,8 @@ struct SettingsView: View {
                     }
                 }
             } // SCROLLVIEW
+            .padding(.horizontal, 20)
         } // NAVIGATION
-        .padding(.horizontal, 20)
     }
 }
 
