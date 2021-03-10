@@ -43,13 +43,14 @@ struct MainView: View {
                 
                 switch selectedIndex {
                 case 0:
-                    /*NavigationView {
+                    /*
+                     NavigationView {
                         ScrollView {
                             ForEach(0..<100) { num in
                                 Text("\(num)")
                             }
                         }
-                            .navigationTitle("Today Page")
+                        .navigationTitle("Today Page")
                     }*/
                     TodayView()
                 case 1:

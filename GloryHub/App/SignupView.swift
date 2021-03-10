@@ -16,6 +16,8 @@ struct SignupView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var repeat_password: String = ""
+    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
+    
     
     //@State private var showLoginButton: Bool = true
     @ObservedObject var manager = SignupHttpAuth()
@@ -160,6 +162,7 @@ struct SignupView: View {
                     self.currentStage = "LoginView"
                 }
         }
+        .offset(y: kGuardian.slide).animation(.easeInOut(duration: 1.0))
     }
 }
 
@@ -203,7 +206,7 @@ class SignupHttpAuth: ObservableObject {
         let body: [String: String] =
             [
                 "user_firstname": first_name,
-                "user_lastname": last_name,
+                "user_surname": last_name,
                 "user_country": country,
                 "user_phone_number": phone_number,
                 "user_email": email,
@@ -217,14 +220,20 @@ class SignupHttpAuth: ObservableObject {
         request.httpMethod = "POST"
         request.httpBody = finalBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("text/json", forHTTPHeaderField: "Accept")
 
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else { return }
+        URLSession.shared.dataTask(with: request) { (data2, response, error) in
+            print("starting 1")
             print(response)
-            print(data)
+            print(data2)
+            guard let data2 = data2 else { return }
+            print("starting 2")
+            //print(response)
+            print(data2)
+            print("starting 3")
             
             do {
-                let json = try JSON(data: data)
+                let json = try JSON(data: data2)
                 if let status = json["status"].int {
                   //Now you got your value
                     print(status)
@@ -380,6 +389,7 @@ class SignupHttpAuth: ObservableObject {
                     }
                 }
             } catch  let error as NSError {
+                print((error as NSError).localizedDescription)
                 DispatchQueue.main.async {
                     self.requestMade = true
                     self.message = "Registration failed"
