@@ -17,6 +17,7 @@ struct SignupView: View {
     @State private var password: String = ""
     @State private var repeat_password: String = ""
     @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
+    @State private var networking: Bool = false
     
     
     //@State private var showLoginButton: Bool = true
@@ -40,6 +41,9 @@ struct SignupView: View {
                     Text(manager.message)
                     .font(.headline)
                     .foregroundColor(.red)
+                        .onAppear(perform: {
+                            networking = false;
+                        })
                 } else {
                     Text("Signup Successful")
                     .font(.headline)
@@ -128,15 +132,18 @@ struct SignupView: View {
                     print("email: \(self.email)")
                     print("password: \(self.password)")
                     //print("repeat_password: \(self.repeat_password)")
-                    manager.checkDetails(
-                        first_name: self.first_name,
-                        last_name: self.last_name,
-                        country: self.country,
-                        phone_number: self.phone_number,
-                        email: self.email,
-                        password: self.password,
-                        repeat_password: self.password
-                    )
+                    if networking == false {
+                        networking = true;
+                        manager.checkDetails(
+                            first_name: self.first_name,
+                            last_name: self.last_name,
+                            country: self.country,
+                            phone_number: self.phone_number,
+                            email: self.email,
+                            password: self.password,
+                            repeat_password: self.password
+                        )
+                    }
                 }) {
                     HStack (spacing: 8) {
                         Text("SIGN UP")

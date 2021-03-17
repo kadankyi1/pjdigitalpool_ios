@@ -15,6 +15,7 @@ struct LoginView: View {
     @ObservedObject var manager = HttpAuth()
     @ObservedObject var updateContent2 = HttpUpdateContentForLogin()
     @Binding var currentStage: String
+    @State private var networking: Bool = false
         
         
     var body: some View {
@@ -28,6 +29,9 @@ struct LoginView: View {
                     Text(manager.message)
                     .font(.headline)
                     .foregroundColor(.red)
+                        .onAppear(perform: {
+                                networking = false;
+                        })
                 } else {
                     Text("Login Successful")
                     .font(.headline)
@@ -58,7 +62,10 @@ struct LoginView: View {
             if manager.showLoginButton {
                 Button(action: {
                     print("\(self.username) and \(self.password)")
-                    manager.checkDetails(user_phone_number: self.username, password: self.password)
+                    if networking == false {
+                        networking = true;
+                        manager.checkDetails(user_phone_number: self.username, password: self.password)
+                    }
                     
                 }) {
                     HStack (spacing: 8) {
@@ -88,6 +95,7 @@ struct LoginView: View {
             
             if updateContent2.showProgress {
                 ProgressView().onDisappear(perform: {
+                    networking = false;
                     if updateContent2.values_set {
                          self.currentStage = "LoggedInView"
                     }
@@ -98,9 +106,12 @@ struct LoginView: View {
                  .padding(.bottom, 150)
                  .onTapGesture {
                     
-                    updateContent2.update_content();
-                    if updateContent2.values_set {
-                         self.currentStage = "LoggedInView"
+                    if networking == false {
+                        networking = true;
+                        updateContent2.update_content();
+                        if updateContent2.values_set {
+                             self.currentStage = "LoggedInView"
+                        }
                     }
                  }
             }
