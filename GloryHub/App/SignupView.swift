@@ -155,12 +155,9 @@ struct SignupView: View {
                 ProgressView()
             }
             
-            Text("Sign-In Here")
-                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                .padding(.bottom, 25)
-                .onTapGesture {
-                    self.currentStage = "LoginView"
-                }
+            SignupActionTextsViews(currentStage: $currentStage)
+                //.padding(.vertical, 35)
+            
         }
         .offset(y: kGuardian.slide).animation(.easeInOut(duration: 1.0))
     }

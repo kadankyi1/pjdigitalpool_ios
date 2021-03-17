@@ -19,7 +19,9 @@ struct ContactUsView: View {
     @State var text: String = "Type here"
     var access_token: String = getSavedString("user_accesstoken");
     @ObservedObject var model: MyModel = MyModel()
-    
+    @Binding var currentStage: String
+    @State private var user_firstname: String = getSavedString("user_firstname")
+    @State private var user_lastname: String = getSavedString("user_lastname")
     
     
     var body: some View {
@@ -36,6 +38,7 @@ struct ContactUsView: View {
                             .resizable()
                             .shadow(radius: 4)
                             .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 250, idealHeight: 300, maxHeight: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            
                     }
                     .frame(height: 200)
                     .onAppear(){
@@ -58,20 +61,36 @@ struct ContactUsView: View {
                             //.background(.gray)
                             Text(text).opacity(0).padding(.all, 8) // <- This will solve the issue if it is in the same ZStack
                         }
-                        .frame(width: .infinity, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: .infinity, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
+                            
+                            if request_manager_send_request.showAlert {
+                                 //self.currentStage = "SignupView"
+                                //print("USER NOT LOGGED IN")
+                                Text("You have to be a registered user to do this. Please revisit the app and signup/login ")
+                                    .fontWeight(.heavy)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.red)
+                            }
+                            
                         if request_manager_send_request.showButton {
                             Button(action: {
                                 print("message_type \(contact_type)")
                                 print("access_token \(access_token)")
-                                request_manager_send_request.sendMessage(user_accesstoken: access_token, message_type: contact_type, message_text: text)
+                                
+                                if(getSavedString("user_firstname") == "Guest" && getSavedString("user_lastname") == "User"){
+                                     self.currentStage = "SignupView"
+                                    request_manager_send_request.show_alert()
+                                } else {
+                                    request_manager_send_request.sendMessage(user_accesstoken: access_token, message_type: contact_type, message_text: text)
+                                }
                                 
                             }) {
                                 HStack (spacing: 8) {
                                     Text("SEND")
                                         .foregroundColor(Color("ColorAccentOppBlack"))
                                 }
-                                .padding(.horizontal, 20)
+                                .padding(.horizontal, 50)
                                 .padding(.vertical, 10)
                                 .foregroundColor(Color("ColorYellowButton"))
                             } //: BUTTON
@@ -79,7 +98,7 @@ struct ContactUsView: View {
                             .background(Color("ColorYellowButton"))
                             .cornerRadius(20)
                             .padding(.bottom, 50)
-                            .padding(.horizontal, 150)
+                            .frame(maxWidth: .infinity, alignment: .center)
                             
                             if request_manager_send_request.requestMade {
                                 VStack {}
@@ -115,7 +134,7 @@ struct ContactUsView: View {
 
 struct ContactUsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactUsView(contact_type: "Testimonies", textfield_msg: "Type your testimony here", poster_image: "partnership")
+        ContactUsView(contact_type: "Testimonies", textfield_msg: "Type your testimony here", poster_image: "partnership", currentStage: .constant("SignupView"))
     }
 }
 
@@ -125,7 +144,12 @@ class SendMessageRequestHttpAuth: ObservableObject {
     @Published var requestMade = false
     @Published var showButton = true
     @Published var message = ""
-
+    @Published var showAlert = false
+    
+    func show_alert() {
+        self.showAlert = true
+    }
+        
     func sendMessage(user_accesstoken: String, message_type: String, message_text: String) {
         self.showButton = false
         guard let url = URL(string: "http://144.202.76.74/api/v1/admin/messages/add") else { return }

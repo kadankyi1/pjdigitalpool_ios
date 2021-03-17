@@ -1,164 +1,101 @@
 //
-//  ContentView.swift
-//  CustomTabBarLBTA
+//  SignupActionTextsViews.swift
+//  GloryHub
 //
-//  Created by Brian Voong on 1/7/21.
+//  Created by Shugaban Media on 17/03/2021.
 //
 
 import SwiftUI
 
-struct MainView: View {
+struct SignupActionTextsViews: View {
+    // MARK: - PROPERTIES
     
-    init() {
-        UITabBar.appearance().barTintColor = .systemBackground
-        UINavigationBar.appearance().barTintColor = .systemBackground
-    }
-    
-    //var access_token: String = getSavedString("user_accesstoken");
-    @State var selectedIndex = 0
-    @State var shouldShowModal = false
-    @ObservedObject var updateContent = HttpUpdateContent()
-    @State var now = Date()
-    
-    let tabBarImageNames = ["newtoday", "newlibrary", "newread", "newlive", "newwitness"]
+    @Binding var currentStage: String
+    @AppStorage("appStage") var appStage: String?
+    @ObservedObject var updateContent3 = HttpUpdateContentForSignup()
     
     var body: some View {
-        /*
-        var timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
-            (_) in
-            updateContent.update_content(user_accesstoken: getSavedString("user_accesstoken"));
-        }
-         */
-        VStack(spacing: 0) {
-            
-            ZStack {
-                
-                Spacer()
-                    .fullScreenCover(isPresented: $shouldShowModal, content: {
-                        Button(action: {shouldShowModal.toggle()}, label: {
-                            Text("Fullscreen cover")
-                        })
-                    
+        Text("Sign-In Here")
+            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+            .padding(.bottom, 25)
+            .onTapGesture {
+                self.currentStage = "LoginView"
+            }
+        
+        
+        if updateContent3.showProgress {
+            ProgressView()
+                .onDisappear(perform: {
+                    if updateContent3.values_set {
+                         self.currentStage = "LoggedInView"
+                    }
                 })
-                
-                switch selectedIndex {
-                case 0:
-                    /*
-                     NavigationView {
-                        ScrollView {
-                            ForEach(0..<100) { num in
-                                Text("\(num)")
-                            }
-                        }
-                        .navigationTitle("Today Page")
-                    }*/
-                    TodayView()
-                case 1:
-                    LibraryView()
-                case 2:
-                    /*
-                    ScrollView {
-                        Text("Read Page")
-                    }
-                    */
-                    ReadListView()
-                    
-                case 3:
-                    LiveBroadcastView()
-                    
-                case 4:
-                    SettingsView(user_name: getSavedString("user_firstname") + " " + getSavedString("user_lastname"))
-                    
-                default:
-                    NavigationView {
-                        Text("Remaining tabs")
-                        
-                    }
-                }
-                
+        } else {
+            Text("Proceed As Guest")
+            .foregroundColor(.gray)
+            .padding(.bottom, 25)
+            .onTapGesture {
+                updateContent3.update_content();
             }
-            
-//            Spacer()
-            
-            Divider()
-                .padding(.bottom, 8)
-            
-            HStack {
-                ForEach(0..<5) { num in
-                    Button(action: {
-                        
-                        /*
-                        if num == 2 {
-                            shouldShowModal.toggle()
-                            return
-                        }
-                        */
-                        
-                        selectedIndex = num
-                    }, label: {
-                        Spacer()
-                        
-                        if num == 2 {
-                            Image(tabBarImageNames[num])
-                                .font(.system(size: 25, weight: .bold))
-                                .foregroundColor(.red)
-                            
-                        } else {
-                            Image(tabBarImageNames[num])
-                                .font(.system(size: 25, weight: .bold))
-                                .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
-                        }
-                        
-                        
-                        Spacer()
-                    })
-                    
-                }
-            }
-            
             
         }
     }
 }
 
 
-struct MainView_Previews: PreviewProvider {
+struct SignupActionTextsViews_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        SignupActionTextsViews(currentStage: .constant("SignupView"))
     }
 }
 
-
-class HttpUpdateContent: ObservableObject {
+class HttpUpdateContentForSignup: ObservableObject {
 
     @Published var requestMade = false
     @Published var values_set = false
-    @Published var showProgress = true
+    @Published var showProgress = false
 
-    func update_content(user_accesstoken: String) {
-        guard let url = URL(string: "http://144.202.76.74/api/v1/admin/today/dasboard") else { return }
-
-        let auth_pass = "Bearer " + user_accesstoken
+    func update_content() {
+        self.showProgress = true
+        guard let url = URL(string: "http://144.202.76.74/api/v1/member/guest") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue(auth_pass, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue(auth_pass, forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
+            print("data")
             print(data)
             do {
                 let json = try JSON(data: data)
-                if let status = json["status"].string {
+                if let status = json["status"].int {
                   //Now you got your value
                     print("UPDATED CONTENT")
                     print(status)
                     
                     DispatchQueue.main.async {
                         self.requestMade = true
-                        if status == "success" {
+                        if status == 1 {
                             print(status)
+                            
+                            if let thisaccesstoken = json["access_token"].string {
+                                //Now you got your value
+                                saveTextInStorage("user_accesstoken", thisaccesstoken)
+                                print("GUEST access_token: \(thisaccesstoken)")
+                              }
+                            if let firstname = json["user"]["user_firstname"].string {
+                                //Now you got your value
+                                saveTextInStorage("user_firstname", firstname)
+                                print("GUEST userFirstName: \(firstname)")
+                              }
+                            if let surname = json["user"]["user_surname"].string {
+                                //Now you got your value
+                                saveTextInStorage("user_lastname", surname)
+                                print("GUEST surname: \(surname)")
+                              }
                             
                             if let notice_image_one = json["data"]["data"][0]["notice_image"].string {
                                 //Now you got your value
@@ -270,21 +207,23 @@ class HttpUpdateContent: ObservableObject {
                                                     //Now you got your value
                                                     saveTextInStorage("latest_video2_date", created_at)
                                                     print("latest_video2_date: \(created_at)")
+                                                    self.values_set = true
+                                                    self.showProgress = false
                                                   }
                                               }
                                           } //VIDEO IMAGE
                                       }
                                   } // START FOR VIDEO NAME
                               } // END FOR VIDEO ID
-                            self.values_set = true
-                            self.showProgress = false
                             
                         }
                     }
                 }
             } catch  let error as NSError {
+                DispatchQueue.main.async {
                 self.values_set = false
                 self.showProgress = false
+                }
                 //
             }
             

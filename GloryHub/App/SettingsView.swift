@@ -27,24 +27,23 @@ struct SettingsView: View {
                     // MARK: -- SECTION 2
                     GroupBox(){
                         NavigationLink(destination:
-                                        ContactUsView(contact_type: "Prayer Request", textfield_msg: "Type your prayer request", poster_image: "prayerrequest")){
+                                        ContactUsView(contact_type: "Prayer Request", textfield_msg: "Type your prayer request", poster_image: "prayerrequest", currentStage: .constant("SignupView"))){
                             SettingsRowView(icon: "prayer", name: "Prayer Requests")
                         }
                         Divider().padding(.vertical, 2)
                         NavigationLink(destination:
-                                        ContactUsView(contact_type: "Feedback", textfield_msg: "Type your feedback here", poster_image: "feedback")){
+                                        ContactUsView(contact_type: "Feedback", textfield_msg: "Type your feedback here", poster_image: "feedback", currentStage: .constant("SignupView"))){
                             SettingsRowView(icon: "positive-vote", name: "Feedback")
                         }
                         Divider().padding(.vertical, 2)
                         NavigationLink(destination:
-                                        ContactUsView(contact_type: "Testimonies", textfield_msg: "Type your testimony here", poster_image: "testimonies")){
+                                        ContactUsView(contact_type: "Testimonies", textfield_msg: "Type your testimony here", poster_image: "testimonies", currentStage: .constant("SignupView"))){
                             SettingsRowView(icon: "rate", name: "Testimonies")
                         }
                         Divider().padding(.vertical, 2)
-                        NavigationLink(destination:
-                                        ContactUsView(contact_type: "Partnership", textfield_msg: "Type your testimony here", poster_image: "partnership")){
-                            SettingsRowView(icon: "donation", name: "Partnership")
-                        }
+                        //NavigationLink(destination:ContactUsView(contact_type: "Partnership", textfield_msg: "Type your testimony here", poster_image: "partnership")){
+                            //SettingsRowView(icon: "donation", name: "Partnership")
+                        //}
                         
                     }
                     Divider().padding(.vertical, 2)

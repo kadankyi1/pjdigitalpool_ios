@@ -16,10 +16,9 @@ struct TodayView: View {
     
     var body: some View {
         
-        var timer2 = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
+        var timer2 = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             (_) in
-            add_change.switch_add(showingFirstAdd: firstAddIsShowing)
-            firstAddIsShowing = add_change.showFirstAdd
+            firstAddIsShowing = add_change.switch_add(showingFirstAdd: firstAddIsShowing)
             print("firstAddIsShowing: \(firstAddIsShowing)")
         }
          NavigationView {
@@ -150,14 +149,12 @@ struct TodayView_Previews: PreviewProvider {
 
 
 class changeAdd: ObservableObject {
-
-        @Published var showFirstAdd = true
     
-        func switch_add(showingFirstAdd: Bool) {
+    func switch_add(showingFirstAdd: Bool) -> Bool {
             if showingFirstAdd {
-                showFirstAdd = false;
+                return false
             } else {
-                showFirstAdd = true;
+                return true
             }
         }
 }
