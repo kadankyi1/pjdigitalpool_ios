@@ -31,7 +31,7 @@ struct SignupActionTextsViews: View {
                     }
                 })
         } else {
-            Text("Proceed As Guest")
+            Text("Proceed As A Guest")
             .foregroundColor(.gray)
             .padding(.bottom, 25)
             .onTapGesture {
