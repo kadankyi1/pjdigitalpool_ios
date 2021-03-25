@@ -99,7 +99,8 @@
   </tr>
 </table>
   </div>
-## Authors
+  
+### Author
 
 * **Dankyi Anno Kwaku**
 
