@@ -28,8 +28,10 @@ struct AdvertCarouselView: View {
                 HStack(alignment: .top, spacing: 20) {
                     ForEach(0..<2) { movie in
                         NavigationLink(destination: ContactUsView(contact_type: "Prayer Request", textfield_msg: "The test", poster_image: advert[movie], currentStage: .constant("SignupView"))) {
-                            MoviePosterCard(advert: advert[movie])
+                            /*
+                             MoviePosterCard(advert: advert[movie])
                                 .frame(width:400, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            */
                         }
                     }
                 }

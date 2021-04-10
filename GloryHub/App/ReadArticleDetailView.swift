@@ -53,9 +53,11 @@ struct ArticleDetailView: View {
                         VStack(alignment: .leading, spacing: 20){
                             // TITLE
                             Text(article.title)
-                                .font(.largeTitle)
+                                .font(.headline)
                                 .fontWeight(.heavy)
                                 .foregroundColor(Color("ColorPrimaryBlue"))
+                                .lineLimit(2)
+                                .padding(.top, 50)
                             
                             // DATE
                             Text(article.article_date)

@@ -18,11 +18,12 @@ struct ReadArticleRowView: View {
         HStack{
             VStack(alignment: .leading, spacing: 5){
                 Text(article.title)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.headline)
                     .fontWeight(.bold)
                 Text(article.body.prefix(100) + "...")
                     .font(.caption)
                     .foregroundColor(Color.secondary)
+                    .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                 Text("  " + article.articletype + "  ")
                     .font(.footnote)
                     .bold()

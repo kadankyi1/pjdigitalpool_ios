@@ -28,12 +28,13 @@ struct LatestVideoMessageTodayView: View {
             
         VStack(alignment: .leading, spacing: 5){
             Text(media.title)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .font(.headline)
                 .fontWeight(.bold)
             
             Text(media.body.prefix(50) + "...")
                 .font(.caption)
                 .foregroundColor(Color.secondary)
+                .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
             
                 HStack{
                     Text("   \(media.badge_text)   ")

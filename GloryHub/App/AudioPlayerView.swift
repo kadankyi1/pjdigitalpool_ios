@@ -59,9 +59,10 @@ struct AudioPlayerView: View {
                     VStack(alignment: .leading, spacing: 20){
                         // TITLE
                         Text(title)
-                            .font(.largeTitle)
+                            .font(.headline)
                             .fontWeight(.heavy)
                             .foregroundColor(Color("ColorPrimaryBlue"))
+                            .lineLimit(2)
                         
                         // DATE
                         Text(date)
