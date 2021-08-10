@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct ReadListView: View {
     // MARK: - PROPERTIES

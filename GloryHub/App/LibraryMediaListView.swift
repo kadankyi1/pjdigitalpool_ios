@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct LibraryMediaListView: View {
     // MARK: - PROPERTIES

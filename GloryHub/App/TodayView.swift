@@ -109,15 +109,16 @@ struct TodayView: View {
             }
             
                 NavigationLink(destination:
-                                VideoPlayerView(
-                                    resource_url: getSavedString("latest_video2_mp4"),
-                                    title: getSavedString("latest_video2_name"),
-                                    description: getSavedString("latest_video2_description"),
-                                    date: getSavedString("latest_video2_date")
+                                AudioPlayerView(
+                                    resource_url: getSavedString("latest_audio_mp3"),
+                                    image: getSavedString("latest_audio_image"),
+                                    title: getSavedString("latest_audio_name"),
+                                    description: getSavedString("latest_audio_description"),
+                                    date: getSavedString("latest_audio_date")
                                 )
                 ){
             GroupBox(){
-            LatestVideoMessageTodayView(
+            LatestAudioMessageTodayView(
                 media: MediaModel(
                     sku: getSavedString("latest_video2_id"),
                     type: "video",
