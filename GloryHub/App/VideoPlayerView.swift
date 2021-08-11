@@ -15,6 +15,8 @@ struct VideoPlayerView: View {
     var description: String
     var date: String
     @State private var isAnimatingImage: Bool = false
+    @State var player = AVPlayer()
+    //var videoUrl: String = "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"
     
     // MARK: -- BODY
     var body: some View {
@@ -23,9 +25,18 @@ struct VideoPlayerView: View {
                 VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 20){
                     // HEADER
                     ZStack {
-                            VideoPlayer(player: AVPlayer(url:  URL(string: resource_url)!))
+                        
+                            VideoPlayer(player: player)
+                                .aspectRatio(contentMode: .fit)
+                                .edgesIgnoringSafeArea(.all)
+                                            .onAppear() {
+                                                    player = AVPlayer(url: URL(string: resource_url)!)
+                                            }
+                            /*
+                         VideoPlayer(player: AVPlayer(url:  URL(string: resource_url)!))
                                 .padding(.vertical, 20)
                                 .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 8, x: 6, y: 8)
+                         */
                     }
                     .frame(height: 500)
                     .padding(.top, 100)

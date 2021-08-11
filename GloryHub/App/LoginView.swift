@@ -498,6 +498,8 @@ class HttpUpdateContentForLogin: ObservableObject {
                                                     //Now you got your value
                                                     saveTextInStorage("latest_video2_date", created_at)
                                                     print("latest_video2_date: \(created_at)")
+                                                    self.values_set = true
+                                                    self.showProgress = false
                                                   }
                                               }
                                           } //VIDEO IMAGE
