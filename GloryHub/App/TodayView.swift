@@ -72,7 +72,7 @@ struct TodayView: View {
                     badge_color: "ColorArticleHeraldOfGlory",
                     date: getSavedString("latest_audio_date"),
                     url: getSavedString("latest_audio_mp3"),
-                    badge_text: "Listen To Audio"
+                    badge_text: "LISTEN TO AUDIO"
                 )
             )
             }
@@ -100,7 +100,7 @@ struct TodayView: View {
                                 badge_color: "ColorArticleHeraldOfGlory",
                                 date: getSavedString("latest_video1_date"),
                                 url: getSavedString("latest_video1_mp4"),
-                                badge_text: "LATEST MESSAGE"
+                                badge_text: "LATEST VIDEO MESSAGE"
                                 )
                            )
                         }
@@ -110,25 +110,25 @@ struct TodayView: View {
             
                 NavigationLink(destination:
                                 AudioPlayerView(
-                                    resource_url: getSavedString("latest_audio_mp3"),
-                                    image: getSavedString("latest_audio_image"),
-                                    title: getSavedString("latest_audio_name"),
-                                    description: getSavedString("latest_audio_description"),
-                                    date: getSavedString("latest_audio_date")
+                                    resource_url: getSavedString("latest_video2_mp4"),
+                                    image: getSavedString("latest_video2_image"),
+                                    title: getSavedString("latest_video2_name"),
+                                    description: getSavedString("latest_video2_description"),
+                                    date: getSavedString("latest_video2_date")
                                 )
                 ){
             GroupBox(){
             LatestAudioMessageTodayView(
                 media: MediaModel(
                     sku: getSavedString("latest_video2_id"),
-                    type: "video",
+                    type: "audio",
                     title: getSavedString("latest_video2_name"),
                     body: getSavedString("latest_video2_description"),
                     image: getSavedString("latest_video2_image"),
                     badge_color: "ColorArticleHeraldOfGlory",
                     date: getSavedString("latest_video2_date"),
                     url: getSavedString("latest_video2_mp4"),
-                    badge_text: "LATEST MESSAGE"
+                    badge_text: "LATEST AUDIO MESSAGE"
                 )
                )
             }

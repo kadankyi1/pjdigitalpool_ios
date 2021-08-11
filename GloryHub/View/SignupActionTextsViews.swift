@@ -180,42 +180,43 @@ class HttpUpdateContentForSignup: ObservableObject {
                                   } // START FOR VIDEO NAME
                               } // END FOR VIDEO ID
                             
-                            if let video_id = json["videos"]["data"][1]["video_id"].int {
-                                //Now you got your value
-                                saveTextInStorage("latest_video2_id", String(video_id))
-                                print("latest_video2_id: \(video_id)")
-                                
-                                if let video_name = json["videos"]["data"][1]["video_name"].string {
-                                    //Now you got your value
-                                    saveTextInStorage("latest_video2_name", video_name)
-                                    print("latest_video2_name: \(video_name)")
-                                    
-                                    if let video_description = json["videos"]["data"][1]["video_description"].string {
-                                        //Now you got your value
-                                        saveTextInStorage("latest_video2_description", video_description)
-                                        print("latest_video2_description: \(video_description)")
-                                        
-                                        if let video_image = json["videos"]["data"][1]["video_image"].string {
-                                            //Now you got your value
-                                            saveTextInStorage("latest_video2_image", video_image)
-                                            print("latest_video2_image: \(video_image)")
-                                            if let video_mp4 = json["videos"]["data"][1]["video_mp4"].string {
-                                                //Now you got your value
-                                                saveTextInStorage("latest_video2_mp4", video_mp4)
-                                                print("latest_video2_mp4: \(video_mp4)")
-                                                
-                                                if let created_at = json["videos"]["data"][1]["created_at"].string {
-                                                    //Now you got your value
-                                                    saveTextInStorage("latest_video2_date", created_at)
-                                                    print("latest_video2_date: \(created_at)")
-                                                    self.values_set = true
-                                                    self.showProgress = false
-                                                  }
-                                              }
-                                          } //VIDEO IMAGE
-                                      }
-                                  } // START FOR VIDEO NAME
-                              } // END FOR VIDEO ID
+                          
+                          if let video_id = json["latest_audios"]["data"][0]["audio_id"].int {
+                              //Now you got your value
+                              saveTextInStorage("latest_video2_id", String(video_id))
+                              print("latest_video2_id: \(video_id)")
+                              
+                              if let video_name = json["latest_audios"]["data"][0]["audio_name"].string {
+                                  //Now you got your value
+                                  saveTextInStorage("latest_video2_name", video_name)
+                                  print("222 latest_video2_name: \(video_name)")
+                                  
+                                  if let video_description = json["latest_audios"]["data"][0]["audio_description"].string {
+                                      //Now you got your value
+                                      saveTextInStorage("latest_video2_description", video_description)
+                                      print("latest_video2_description: \(video_description)")
+                                      
+                                      if let video_image = json["latest_audios"]["data"][0]["audio_image"].string {
+                                          //Now you got your value
+                                          saveTextInStorage("latest_video2_image", video_image)
+                                          print("latest_video2_image: \(video_image)")
+                                          if let video_mp4 = json["latest_audios"]["data"][0]["audio_mp3"].string {
+                                              //Now you got your value
+                                              saveTextInStorage("latest_video2_mp4", video_mp4)
+                                              print("latest_video2_mp4: \(video_mp4)")
+                                              
+                                              if let created_at = json["latest_audios"]["data"][0]["created_at"].string {
+                                                  //Now you got your value
+                                                  saveTextInStorage("latest_video2_date", created_at)
+                                                  print("latest_video2_date: \(created_at)")
+                                                self.values_set = true
+                                                self.showProgress = false
+                                                }
+                                            }
+                                        } //VIDEO IMAGE
+                                    }
+                                } // START FOR VIDEO NAME
+                            } // END FOR VIDEO ID
                             
                         }
                     }

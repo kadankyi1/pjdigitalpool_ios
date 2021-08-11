@@ -354,7 +354,7 @@ class SignupHttpAuth: ObservableObject {
                                 if let video_name = json["latest_audios"]["data"][0]["audio_name"].string {
                                     //Now you got your value
                                     saveTextInStorage("latest_video2_name", video_name)
-                                    print("latest_video2_name: \(video_name)")
+                                    print("555 latest_video2_name: \(video_name)")
                                     
                                     if let video_description = json["latest_audios"]["data"][0]["audio_description"].string {
                                         //Now you got your value

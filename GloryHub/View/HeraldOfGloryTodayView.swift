@@ -50,7 +50,7 @@ struct HeraldOfGloryTodayView: View {
                         Text("   \(media.badge_text)   ")
                             .font(.footnote)
                             .bold()
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color("ColorAccentWhite"))
                             .background(Color("ColorGrayTwo"))
                             .cornerRadius(2)
                         Spacer()
