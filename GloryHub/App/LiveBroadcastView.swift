@@ -38,7 +38,7 @@ struct WebView: UIViewRepresentable {
     var url: URL?     // optional, if absent, one of below search servers used
     @Binding var reload: Bool
 
-    private let urls = [URL(string: "https://embed.restream.io/player/index.html?token=f1bc331156c70d770acb6a186ff8b664")!, URL(string: "https://embed.restream.io/player/index.html?token=f1bc331156c70d770acb6a186ff8b664")!]
+    private let urls = [URL(string: "https://www.youtube.com/embed/live_stream?channel=UC5l0vl8w8E6xUILUs_tymwg")!, URL(string: "https://www.youtube.com/embed/live_stream?channel=UC5l0vl8w8E6xUILUs_tymwg")!]
     private let webview = WKWebView()
 
     fileprivate func loadRequest(in webView: WKWebView) {
