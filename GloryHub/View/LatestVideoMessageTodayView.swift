@@ -44,6 +44,13 @@ struct LatestVideoMessageTodayView: View {
                         .background(Color("ColorGrayTwo"))
                         .cornerRadius(2)
                     Spacer()
+                    Image("video")
+                        .renderingMode(.original)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.3), radius: 3, x: 2, y: 2)
+                        .cornerRadius(8)
                 }
         }
             /*
