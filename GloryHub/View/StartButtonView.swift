@@ -39,12 +39,12 @@ struct StartButtonView: View {
 
     // MARK - PREVIEW
 
-/*
+
 struct StartButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        StartButtonView(currentStage: Binding<String>)
+        StartButtonView(currentStage: .constant("LoginView"))
             .preferredColorScheme(.light)
             .previewLayout(.sizeThatFits)
     }
 }
- */
+ 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     // MARK: -- PROPERTIES
+    @Binding var currentStage: String
     var user_name: String
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,14 +20,8 @@ struct SettingsView: View {
                 VStack(spacing: 20){
                     // MARK: -- SECTION 1
                     
-                    GroupBox(label: Text(user_name)){
-                        SettingsRowView(icon: "prayer", name: "Prayer Requests")
-                        Spacer()
-                        Spacer()
-                        Text("Log Out")
-                            .fontWeight(.heavy)
-                            .foregroundColor(.red)
-                        
+                    GroupBox(){
+                        SettingsLogoutView(currentStage: .constant("MainView"),  icon: user_name, name: "Log Out")
                     }
                     Divider().padding(.vertical, 2)
                     // MARK: -- SECTION 2
@@ -68,6 +63,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(user_name: "Mark Caw")
+        SettingsView(currentStage: .constant("MainView"), user_name: "Mark Caw")
     }
 }

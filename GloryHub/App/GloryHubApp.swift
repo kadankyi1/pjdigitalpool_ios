@@ -9,14 +9,14 @@ var body: some Scene {
     
     WindowGroup {
         
-        if(self.currentStage == "OnboardingView"){
+        if(self.currentStage == "OnboardingView" || self.currentStage == ""){
             OnboardingView(currentStage: $currentStage)
         } else if(self.currentStage == "LoginView"){
             LoginView(currentStage: $currentStage)
         } else if(self.currentStage == "SignupView"){
             SignupView(currentStage: $currentStage)
         } else {
-            MainView()
+            MainView(currentStage: $currentStage)
         }
     }
   }

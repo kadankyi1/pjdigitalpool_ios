@@ -9,8 +9,10 @@ import SwiftUI
 import SwiftyJSON
 
 struct MainView: View {
+    @Binding var currentStage: String
     
-    init() {
+    init(currentStage: Binding<String>) {
+        self._currentStage = .constant("MainView")
         UITabBar.appearance().barTintColor = .systemBackground
         UINavigationBar.appearance().barTintColor = .systemBackground
     }
@@ -69,7 +71,7 @@ struct MainView: View {
                     LiveBroadcastView()
                     
                 case 4:
-                    SettingsView(user_name: getSavedString("user_firstname") + " " + getSavedString("user_lastname"))
+                    SettingsView(currentStage: .constant("MainView"), user_name: getSavedString("user_firstname") + " " + getSavedString("user_lastname"))
                     
                 default:
                     NavigationView {
@@ -123,7 +125,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(currentStage: .constant("MainView"))
     }
 }
 

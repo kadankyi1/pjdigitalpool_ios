@@ -179,6 +179,13 @@ func saveIntegerInStorage(_ index: String, _ value: Int) {
     UserDefaults.standard.set(value, forKey:index)
 }
 
+func deleteUserData(){
+    let domain = Bundle.main.bundleIdentifier!
+    UserDefaults.standard.removePersistentDomain(forName: domain)
+    UserDefaults.standard.synchronize()
+    print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+}
+
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {

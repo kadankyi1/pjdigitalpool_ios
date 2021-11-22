@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsLogoutView: View {
     // MARK: -- PROPERTIES
     
+    @Binding var currentStage: String
     var icon: String
     var name: String
     var content: String? = nil
@@ -20,9 +21,18 @@ struct SettingsLogoutView: View {
     // MARK: -- BODY
     var body: some View {
         HStack {
-            Text(icon).foregroundColor(Color.gray)
+            Text(icon).foregroundColor(Color.black)
             Spacer()
-            Text(name).foregroundColor(Color.gray)
+            /*
+             Text(name)
+                .foregroundColor(Color.black)
+                .font(.system(size: 14, weight: .heavy, design: .default))
+                .onTapGesture {
+                    deleteUserData()
+                    self.currentStage = "OnboardingView"
+                    print("currentStage: OnboardingView")
+                }
+             */
             
             if(content != nil){
                 
@@ -40,7 +50,7 @@ struct SettingsLogoutView: View {
 // MARK: -- PREVIEW
 struct SettingsLogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsRowView(icon: "newwitness",name: "Prayer Requests")
+        SettingsLogoutView(currentStage: .constant("SignupView"), icon: "newwitness",name: "Prayer Requests")
             .previewLayout(.fixed(width: 375, height: 60))
             .padding()
     }
