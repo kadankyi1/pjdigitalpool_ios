@@ -20,7 +20,12 @@ struct SettingsView: View {
                     // MARK: -- SECTION 1
                     
                     GroupBox(label: Text(user_name)){
-                        
+                        SettingsRowView(icon: "prayer", name: "Prayer Requests")
+                        Spacer()
+                        Spacer()
+                        Text("Log Out")
+                            .fontWeight(.heavy)
+                            .foregroundColor(.red)
                         
                     }
                     Divider().padding(.vertical, 2)
