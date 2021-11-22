@@ -22,6 +22,7 @@ struct MainView: View {
     @State var now = Date()
     
     let tabBarImageNames = ["newtoday", "newlibrary", "newread", "newlive", "newwitness"]
+    let tabBarMenuNames = ["Today", "Sermons", "Library", "Live", "Witness"]
     
     var body: some View {
         /*
@@ -99,23 +100,20 @@ struct MainView: View {
                     }, label: {
                         Spacer()
                         
-                        if num == 2 {
-                            Image(tabBarImageNames[num])
-                                .font(.system(size: 25, weight: .bold))
-                                .foregroundColor(.red)
-                            
-                        } else {
-                            Image(tabBarImageNames[num])
-                                .font(.system(size: 25, weight: .bold))
-                                .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
-                        }
-                        
-                        
-                        Spacer()
+                        VStack {
+                                 Image(tabBarImageNames[num])
+                                    .font(.system(size: 25, weight: .bold))
+                                    .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
+                                Text(tabBarMenuNames[num])
+                                    .foregroundColor(Color("ColorAccentOppBlack"))
+                                    .font(.system(size: 12))
+                            Spacer()
+                        } // MARK: - VSTACK
+                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 55)
                     })
                     
                 }
-            }
+            } // MARK: - HSTACK
             
             
         }
