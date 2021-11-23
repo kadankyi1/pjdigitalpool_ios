@@ -6,6 +6,6 @@ target 'GloryHub' do
   use_frameworks!
 
   # Pods for GloryHub
-  pod "Player", "~> 0.13.2"
+  pod 'BMPlayer', '~> 1.3.0'
 
 end

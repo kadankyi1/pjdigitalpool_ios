@@ -25,10 +25,11 @@ struct LibraryMediaListView: View {
                     List {
                         ForEach(media_http_manager.received_media) { item in
                             if item.type == "video" {
-                                NavigationLink(destination: VideoPlayerView(resource_url: item.url, title: item.title, description: item.body, date: item.date)){
+                                 NavigationLink(destination: VideoPlayerView(resource_url: item.url, title: item.title, description: item.body, date: item.date)){
                                     MediaListRowItem(media: item)
                                         .padding(.vertical, 4)
                                 }
+                                 
                             } else {
                                 NavigationLink(destination: AudioPlayerView(resource_url: item.url, image: item.image, title: item.title, description: item.body, date: item.date)){
                                     MediaListRowItem(media: item)
