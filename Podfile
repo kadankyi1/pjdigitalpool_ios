@@ -6,6 +6,6 @@ target 'GloryHub' do
   use_frameworks!
 
   # Pods for GloryHub
-  pod 'BMPlayer', '~> 1.3.0'
+  pod "ASPVideoPlayer"
 
 end

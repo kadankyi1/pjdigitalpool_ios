@@ -50,18 +50,16 @@ struct StartCardView: View {
         }
         .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         .background(LinearGradient(gradient: Gradient(colors: [Color("ColorBlueInLoggedSpace")]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
-        .cornerRadius(20)
-        .padding(.horizontal, 10)
+        //.cornerRadius(20)
+        //.padding(.horizontal, 10)
     }
 }
 
 // MARK: - PREVIEW
-
-/*
 struct StartCardView_Previews: PreviewProvider {
     static var previews: some View {
-        StartCardView(start: startData[1], currentStage: <#Binding<String>#>)
+        StartCardView(start: startData[1], currentStage: .constant("SignupView"))
             .previewLayout(.fixed(width: 320, height: 640))
     }
 }
- */
+ 

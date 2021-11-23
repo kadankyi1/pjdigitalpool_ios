@@ -1,30 +1,16 @@
 PODS:
-  - BMPlayer (1.3.2):
-    - BMPlayer/Full (= 1.3.2)
-  - BMPlayer/Core (1.3.2)
-  - BMPlayer/Full (1.3.2):
-    - BMPlayer/Core
-    - NVActivityIndicatorView (~> 4.7.0)
-    - SnapKit (~> 5.0.0)
-  - NVActivityIndicatorView (4.7.0):
-    - NVActivityIndicatorView/Presenter (= 4.7.0)
-  - NVActivityIndicatorView/Presenter (4.7.0)
-  - SnapKit (5.0.1)
+  - ASPVideoPlayer (6.1.2)
 
 DEPENDENCIES:
-  - BMPlayer (~> 1.3.0)
+  - ASPVideoPlayer
 
 SPEC REPOS:
   trunk:
-    - BMPlayer
-    - NVActivityIndicatorView
-    - SnapKit
+    - ASPVideoPlayer
 
 SPEC CHECKSUMS:
-  BMPlayer: e4b241bd088644d7b89d991a1a65d1b1615d19b3
-  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  ASPVideoPlayer: 70215f5b4cfbf33614548ee56a67290f640023d0
 
-PODFILE CHECKSUM: 1fa4448c5b9f693079cb41dbfa72c8396c2c1748
+PODFILE CHECKSUM: ae4ffdffcc247929b10f91a60c155820a4d327a0
 
 COCOAPODS: 1.11.2

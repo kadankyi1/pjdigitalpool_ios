@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftyJSON
 
 struct LoginView: View {
-    
+    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 3)
+    @State private var name = Array<String>.init(repeating: "", count: 3)
+
     @State private var username: String = ""
     @State private var password: String = ""
     //@State private var showLoginButton: Bool = true
@@ -45,13 +47,14 @@ struct LoginView: View {
                         print("currentStage: \(self.currentStage)")
                     })
                 }
-            }
+            } // MARK - if manager.requestMade
  
             
             TextField("Phone Number", text: $username).textFieldStyle(RoundedBorderTextFieldStyle.init())
                 .scaleEffect(x: 1, y: 1, anchor: .center)
                 .padding(.horizontal, 50)
                 .padding(.bottom, 10)
+                .background(GeometryGetter(rect: $kGuardian.rects[0]))
                 //.position(x: 1, y: 1)
             
             
@@ -59,6 +62,7 @@ struct LoginView: View {
                 .scaleEffect(x: 1, y: 1, anchor: .top)
                 .padding(.horizontal, 50)
                 .padding(.bottom, 10)
+                .background(GeometryGetter(rect: $kGuardian.rects[1]))
             
             if manager.showLoginButton {
                 Button(action: {
@@ -82,7 +86,8 @@ struct LoginView: View {
                 .cornerRadius(20)
                 .padding(.bottom, 50)
                 
-            } else {
+            } // MARK - if manager.showLoginButton
+            else {
                 ProgressView()
             }
             
@@ -117,7 +122,7 @@ struct LoginView: View {
                  }
             }
             
-        }
+        } // MARK - VSTACK
     }
 }
 
