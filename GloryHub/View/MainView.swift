@@ -99,12 +99,16 @@ struct MainView: View {
                         */
                         
                         selectedIndex = num
+                        
                     }, label: {
                         Spacer()
                         
                         VStack {
                                  Image(tabBarImageNames[num])
-                                    .font(.system(size: 25, weight: .bold))
+                                    //.font(.system(size: 25, weight: .bold))
+                                    .renderingMode(.template)
+                                    .colorMultiply(.init(white: 0.8))
+                                    //.foregroundColor(.red)
                                     .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
                                 Text(tabBarMenuNames[num])
                                     .foregroundColor(Color("ColorAccentOppBlack"))
