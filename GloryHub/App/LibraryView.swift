@@ -18,7 +18,7 @@ struct LibraryView: View {
                         GroupBox(){
                             NavigationLink(destination:
                                             LibraryMediaListView(fetch_type: "audios", fetch_url: "http://144.202.76.74/api/v1/admin/audios/list", favorite_ids: "")){
-                                LibraryOptionRowView(icon: "music", name: "Audios")
+                                LibraryOptionRowView(icon: "audioopt", name: "Audios")
                             }
                             
                         }
@@ -31,7 +31,7 @@ struct LibraryView: View {
                         GroupBox(){
                             NavigationLink(destination:
                                             LibraryMediaListView(fetch_type: "videos", fetch_url: "http://144.202.76.74/api/v1/admin/videos/list", favorite_ids: "")){
-                                LibraryOptionRowView(icon: "video_lib", name: "Videos")
+                                LibraryOptionRowView(icon: "videoopttt", name: "Videos")
                             }
                             
                         }
@@ -44,7 +44,7 @@ struct LibraryView: View {
                         GroupBox(){
                             NavigationLink(destination:
                                             LibraryMediaListView(fetch_type: "favorites", fetch_url: "http://144.202.76.74/api/v1/admin/favorites/list", favorite_ids: "2")){
-                                LibraryOptionRowView(icon: "bookmark", name: "Favorites")
+                                LibraryOptionRowView(icon: "favopt", name: "Favorites")
                             }
                             
                         }
