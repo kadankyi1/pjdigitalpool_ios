@@ -24,7 +24,7 @@ struct MainView: View {
     @State var now = Date()
     
     let tabBarImageNames = ["newtoday", "newlibrary", "newread", "newlive", "newwitness"]
-    let tabBarMenuNames = ["Today", "Sermons", "Library", "Live", "Witness"]
+    let tabBarMenuNames = ["Today", "Sermons", "Library", "Live", "Connect"]
     
     var body: some View {
         /*
