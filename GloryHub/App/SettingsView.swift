@@ -49,8 +49,8 @@ struct SettingsView: View {
                     Divider().padding(.vertical, 2)
                     GroupBox(){
                         
-                        SettingsRowView(icon: "speech", name: "", content: nil, linkLabel: "Christ Witness", linkDestination: "https://www.facebook.com/thegloriouschurch11")
-                        SettingsRowView(icon: "holy-ghost", name: "", content: nil, linkLabel: "Holy Generation", linkDestination: "https://www.facebook.com/theHoly.Generation20")
+                        SettingsRowView(icon: "speech", name: "", content: nil, linkLabel: "Christ Witness", linkDestination: "https://web.facebook.com/TheGloriousChurchNOTADENOMINATION")
+                        SettingsRowView(icon: "thg", name: "", content: nil, linkLabel: "The Holy Generation", linkDestination: "https://www.facebook.com/theHoly.Generation20")
                         SettingsRowView(icon: "struggle", name: "", content: nil, linkLabel: "Impact Train", linkDestination: "http://144.202.76.74/uploads/pdfs/hog.pdf")
                         
                     }
