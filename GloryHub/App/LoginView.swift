@@ -147,7 +147,7 @@ class HttpAuth: ObservableObject {
 
     func checkDetails(user_phone_number: String, password: String) {
         showLoginButton = false
-        guard let url = URL(string: "http://144.202.76.74/api/v1/member/login") else { return }
+        guard let url = URL(string: "https://thegloryhub.fishpott.com/api/v1/member/login") else { return }
 
         let body: [String: String] = ["user_phone_number": user_phone_number, "password": password]
 
@@ -353,7 +353,7 @@ class HttpUpdateContentForLogin: ObservableObject {
 
     func update_content() {
         self.showProgress = true
-        guard let url = URL(string: "http://144.202.76.74/api/v1/member/guest") else { return }
+        guard let url = URL(string: "https://thegloryhub.fishpott.com/api/v1/member/guest") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

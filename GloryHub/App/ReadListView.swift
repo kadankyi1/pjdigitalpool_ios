@@ -81,7 +81,7 @@ class HttpGetReadArticles: ObservableObject {
     @Published var received_articles: [ArticleModel] = []
 
     func getArticles(user_accesstoken: String) {
-        guard let url = URL(string: "http://144.202.76.74/api/v1/admin/articles/list")
+        guard let url = URL(string: "https://thegloryhub.fishpott.com/api/v1/admin/articles/list")
         else {
             print("Request failed 1")
             return

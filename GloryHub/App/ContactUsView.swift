@@ -153,7 +153,7 @@ class SendMessageRequestHttpAuth: ObservableObject {
         
     func sendMessage(user_accesstoken: String, message_type: String, message_text: String) {
         self.showButton = false
-        guard let url = URL(string: "http://144.202.76.74/api/v1/admin/messages/add") else { return }
+        guard let url = URL(string: "https://thegloryhub.fishpott.com/api/v1/admin/messages/add") else { return }
 
         let body: [String: String] = ["message_type": message_type, "message_text": message_text]
 

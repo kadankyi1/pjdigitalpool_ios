@@ -75,7 +75,7 @@ class MyModel2: ObservableObject {
 
 struct LibraryMediaListView_Previews: PreviewProvider {
     static var previews: some View {
-        LibraryMediaListView(fetch_type: "audios", fetch_url: "http://144.202.76.74/api/v1/admin/audios/list", favorite_ids: "")
+        LibraryMediaListView(fetch_type: "audios", fetch_url: "https://thegloryhub.fishpott.com/api/v1/admin/audios/list", favorite_ids: "")
     }
 }
 

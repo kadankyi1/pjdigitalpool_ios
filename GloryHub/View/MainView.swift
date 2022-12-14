@@ -111,7 +111,7 @@ struct MainView: View {
                                     //.foregroundColor(.red)
                                     .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
                                 Text(tabBarMenuNames[num])
-                                    .foregroundColor(Color("ColorAccentOppBlack"))
+                                .foregroundColor(selectedIndex == num ? Color(.black) : .init(white: 0.8))
                                     .font(.system(size: 12))
                             Spacer()
                         } // MARK: - VSTACK
@@ -141,7 +141,7 @@ class HttpUpdateContent: ObservableObject {
     @Published var showProgress = true
 
     func update_content(user_accesstoken: String) {
-        guard let url = URL(string: "http://144.202.76.74/api/v1/admin/today/dasboard") else { return }
+        guard let url = URL(string: "https://thegloryhub.fishpott.com//api/v1/admin/today/dasboard") else { return }
 
         let auth_pass = "Bearer " + user_accesstoken
         

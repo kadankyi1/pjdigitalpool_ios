@@ -213,7 +213,7 @@ class SignupHttpAuth: ObservableObject {
         password: String,
         repeat_password: String) {
         showLoginButton = false
-        guard let url = URL(string: "http://144.202.76.74/api/v1/member/register") else { return }
+        guard let url = URL(string: "https://thegloryhub.fishpott.com/api/v1/member/register") else { return }
 
         let body: [String: String] =
             [

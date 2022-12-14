@@ -41,17 +41,17 @@ struct SettingsView: View {
                             SettingsRowView(icon: "rate", name: "Testimonies")
                         }
                         Divider().padding(.vertical, 2)
-                        //NavigationLink(destination:ContactUsView(contact_type: "Partnership", textfield_msg: "Type your testimony here", poster_image: "partnership")){
-                            //SettingsRowView(icon: "donation", name: "Partnership")
-                        //}
+                        NavigationLink(destination:PartnershipView(contact_type: "Partnership", textfield_msg: "Type your testimony here", poster_image: "partnership", currentStage: .constant("SignupView"))){
+                            SettingsRowView(icon: "donation", name: "Partnership")
+                        }
                         
                     }
                     Divider().padding(.vertical, 2)
                     GroupBox(){
                         
-                        SettingsRowView(icon: "speech", name: "", content: nil, linkLabel: "Christ Witness", linkDestination: "https://web.facebook.com/TheGloriousChurchNOTADENOMINATION")
+                        SettingsRowView(icon: "hog", name: "", content: nil, linkLabel: "Heralding The Glorious Church", linkDestination: "https://web.facebook.com/TheGloriousChurchNOTADENOMINATION")
                         SettingsRowView(icon: "thg", name: "", content: nil, linkLabel: "The Holy Generation", linkDestination: "https://www.facebook.com/theHoly.Generation20")
-                        SettingsRowView(icon: "struggle", name: "", content: nil, linkLabel: "Impact Train", linkDestination: "http://144.202.76.74/uploads/pdfs/hog.pdf")
+                        SettingsRowView(icon: "struggle", name: "", content: nil, linkLabel: "Impact Train", linkDestination: "https://thegloryhub.fishpott.com/uploads/pdfs/hog.pdf")
                         
                     }
                 }
