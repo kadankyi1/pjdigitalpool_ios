@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 import URLImage // Import the package module
 
 struct TodayView: View {
     
     @ObservedObject var add_change = changeAdd()
     @State var firstAddIsShowing: Bool = true
+    var access_token: String = getSavedString("user_accesstoken");
+    @ObservedObject var todaycontent_http_manager = HttpGetTodayContent()
     @State var now = Date()
     
     var body: some View {
@@ -21,7 +24,10 @@ struct TodayView: View {
             firstAddIsShowing = add_change.switch_add(showingFirstAdd: firstAddIsShowing)
             print("firstAddIsShowing: \(firstAddIsShowing)")
         }
+        
          NavigationView {
+             
+        if todaycontent_http_manager.requestMade && todaycontent_http_manager.status == "success" {
             ScrollView(.vertical, showsIndicators: false){
         VStack(alignment: .leading, spacing: 16) {
             
@@ -137,7 +143,17 @@ struct TodayView: View {
                 }
           }
          }
-        }
+        //} // SUCCESS
+       } // REQUEST MADE
+             else {
+                 
+                     ProgressView()
+                     .onAppear(perform: {
+                         print("Getting today's content")
+                         todaycontent_http_manager.get_today_content(user_accesstoken: access_token, url: "https://thegloryhub.fishpott.com/api/v1/admin/today/dasboard")
+                     })
+             }
+      }
     }
 }
 
@@ -159,3 +175,185 @@ class changeAdd: ObservableObject {
             }
         }
 }
+
+
+        
+        class HttpGetTodayContent: ObservableObject {
+
+            @Published var requestMade = false
+            @Published var values_set = false
+            @Published var showProgress = false
+            @Published var message = ""
+            @Published var status = "failed"
+            @Published var received_media: [MediaModel] = []
+
+            func get_today_content(user_accesstoken: String, url: String) {
+                guard let url = URL(string:url) else { return }
+
+                let auth_pass = "Bearer " + user_accesstoken
+                
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                request.setValue("application/json", forHTTPHeaderField: "Accept")
+                request.setValue(auth_pass, forHTTPHeaderField: "Authorization")
+
+                URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    guard let data = data else { return }
+                    print(data)
+                    do {
+                        let json = try JSON(data: data)
+                        if let status = json["status"].string {
+                          //Now you got your value
+                            print("GOT MEDIA CONTENT")
+                            print(status)
+                            
+                            DispatchQueue.main.async {
+                                self.requestMade = true
+                                self.status = status
+                                if status == "success" {
+                                    print(status)
+                                    if let items = json["data"]["data"].array {
+                                        
+                                        
+                                        if let notice_image_one = json["data"]["data"][0]["notice_image"].string {
+                                            //Now you got your value
+                                            saveTextInStorage("notice_image_one", notice_image_one)
+                                            print("note_image_one: \(notice_image_one)")
+                                          }
+                                        
+                                        if let notice_image_two = json["data"]["data"][1]["notice_image"].string {
+                                            //Now you got your value
+                                            saveTextInStorage("notice_image_two", notice_image_two)
+                                            print("notice_image_two: \(notice_image_two)")
+                                          }
+                                        
+                                        if let audio_id = json["audios"]["data"][0]["audio_id"].int {
+                                            //Now you got your value
+                                            saveTextInStorage("latest_audio_id", String(audio_id))
+                                            print("audio_id: \(audio_id)")
+                                            
+                                            if let audio_name = json["audios"]["data"][0]["audio_name"].string {
+                                                //Now you got your value
+                                                saveTextInStorage("latest_audio_name", audio_name)
+                                                print("latest_audio_name: \(audio_name)")
+                                                if let audio_description = json["audios"]["data"][0]["audio_description"].string {
+                                                    //Now you got your value
+                                                    saveTextInStorage("latest_audio_description", audio_description)
+                                                    print("latest_audio_description: \(audio_description)")
+                                                    
+                                                    if let audio_image = json["audios"]["data"][0]["audio_image"].string {
+                                                        //Now you got your value
+                                                        saveTextInStorage("latest_audio_image", audio_image)
+                                                        print("latest_audio_image: \(audio_image)")
+                                                        if let audio_mp3 = json["audios"]["data"][0]["audio_mp3"].string {
+                                                            //Now you got your value
+                                                            saveTextInStorage("latest_audio_mp3", audio_mp3)
+                                                            print("latest_audio_mp3: \(audio_mp3)")
+                                                            
+                                                            if let created_at = json["audios"]["data"][0]["created_at"].string {
+                                                                //Now you got your value
+                                                                saveTextInStorage("latest_audio_date", created_at)
+                                                                print("latest_audio_date: \(created_at)")
+                                                              }
+                                                          }
+                                                      } //AUDIO IMAGE
+                                                  }
+                                              } // START FOR AUDIO NAME
+                                          } // END FOR AUDIO ID
+                                        
+                                        
+                                        if let video_id = json["videos"]["data"][0]["video_id"].int {
+                                            //Now you got your value
+                                            saveTextInStorage("latest_video1_id", String(video_id))
+                                            print("latest_video1_id: \(video_id)")
+                                            
+                                            if let video_name = json["videos"]["data"][0]["video_name"].string {
+                                                //Now you got your value
+                                                saveTextInStorage("latest_video1_name", video_name)
+                                                print("latest_video1_name: \(video_name)")
+                                                
+                                                if let video_description = json["videos"]["data"][0]["video_description"].string {
+                                                    //Now you got your value
+                                                    saveTextInStorage("latest_video1_description", video_description)
+                                                    print("latest_video1_description: \(video_description)")
+                                                    
+                                                    if let video_image = json["videos"]["data"][0]["video_image"].string {
+                                                        //Now you got your value
+                                                        saveTextInStorage("latest_video1_image", video_image)
+                                                        print("latest_video1_image: \(video_image)")
+                                                        if let video_mp4 = json["videos"]["data"][0]["video_mp4"].string {
+                                                            //Now you got your value
+                                                            saveTextInStorage("latest_video1_mp4", video_mp4)
+                                                            print("latest_video1_mp4: \(video_mp4)")
+                                                            
+                                                            if let created_at = json["videos"]["data"][0]["created_at"].string {
+                                                                //Now you got your value
+                                                                saveTextInStorage("latest_video1_date", created_at)
+                                                                print("latest_video1_date: \(created_at)")
+                                                              }
+                                                          }
+                                                      } //VIDEO IMAGE
+                                                  }
+                                              } // START FOR VIDEO NAME
+                                          } // END FOR VIDEO ID
+                                        
+                                        if let video_id = json["latest_audios"]["data"][0]["audio_id"].int {
+                                            //Now you got your value
+                                            saveTextInStorage("latest_video2_id", String(video_id))
+                                            print("latest_video2_id: \(video_id)")
+                                            
+                                            if let video_name = json["latest_audios"]["data"][0]["audio_name"].string {
+                                                //Now you got your value
+                                                saveTextInStorage("latest_video2_name", video_name)
+                                                print("444 latest_video2_name: \(video_name)")
+                                                
+                                                if let video_description = json["latest_audios"]["data"][0]["audio_description"].string {
+                                                    //Now you got your value
+                                                    saveTextInStorage("latest_video2_description", video_description)
+                                                    print("latest_video2_description: \(video_description)")
+                                                    
+                                                    if let video_image = json["latest_audios"]["data"][0]["audio_image"].string {
+                                                        //Now you got your value
+                                                        saveTextInStorage("latest_video2_image", video_image)
+                                                        print("latest_video2_image: \(video_image)")
+                                                        if let video_mp4 = json["latest_audios"]["data"][0]["audio_mp3"].string {
+                                                            //Now you got your value
+                                                            saveTextInStorage("latest_video2_mp4", video_mp4)
+                                                            print("latest_video2_mp4: \(video_mp4)")
+                                                            
+                                                            if let created_at = json["latest_audios"]["data"][0]["created_at"].string {
+                                                                //Now you got your value
+                                                                saveTextInStorage("latest_video2_date", created_at)
+                                                                print("latest_video2_date: \(created_at)")
+                                                                self.values_set = true
+                                                                self.showProgress = false
+                                                              }
+                                                          }
+                                                      } //VIDEO IMAGE
+                                                  }
+                                              } // START FOR VIDEO NAME
+                                          } // END FOR VIDEO ID
+                                    } else {
+                                        if let message = json["message"].string {
+                                            //Now you got your value
+                                              print(status)
+                                              
+                                              DispatchQueue.main.async {
+                                                  self.message = message
+                                              }
+                                          }
+                                    }
+                                }
+                            }
+                        }
+                    } catch  let error as NSError {
+                        DispatchQueue.main.async {
+                        self.requestMade = true
+                        self.message = "Failed to get media"
+                        print("Request failed 3")
+                        }
+                    }
+                    
+                }.resume()
+            }
+        }
